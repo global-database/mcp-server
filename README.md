@@ -70,6 +70,12 @@ Connectors → + Custom connector → Remote**, enter:
 
 Then open the connector card to run the OAuth sign-in.
 
+### Grok
+
+At [grok.com/connectors](https://grok.com/connectors) → **New Connector → Custom**, enter the
+MCP server URL `https://mcp.globaldatabase.com/mcp` and complete the OAuth sign-in. Grok
+discovers the tools from the live endpoint.
+
 ### Claude.ai / other MCP clients
 
 Add a custom connector pointing at `https://mcp.globaldatabase.com/mcp`.

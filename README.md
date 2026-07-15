@@ -35,6 +35,27 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (per project):
 claude mcp add --transport http global-database https://mcp.globaldatabase.com/mcp
 ```
 
+### Gemini CLI
+
+Install the bundled extension straight from this repo:
+
+```bash
+gemini extensions install https://github.com/global-database/mcp-server
+```
+
+Or add the server to `settings.json` by hand:
+
+```json
+{
+  "mcpServers": {
+    "global-database": {
+      "httpUrl": "https://mcp.globaldatabase.com/mcp",
+      "authProviderType": "dynamic_discovery"
+    }
+  }
+}
+```
+
 ### Perplexity
 
 Requires a paid plan (custom connectors are a Pro/Enterprise feature). In **Settings →

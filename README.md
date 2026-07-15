@@ -72,6 +72,16 @@ Get an API key at [globaldatabase.com](https://globaldatabase.com/).
 | `kyb_financial` | Detailed financial statements across multiple years. |
 | `kyb_officers_search` | Reverse officer lookup by person's name, across jurisdictions. |
 
+## Cursor plugin
+
+This repo is also packaged as a Cursor plugin (`.cursor-plugin/plugin.json` + `mcp.json`),
+so it can be installed from the Cursor marketplace, not only wired up by hand. It bundles:
+
+- the remote MCP server above (all tools), and
+- a **`company-due-diligence`** skill that walks the agent through a structured KYB
+  review — resolve the entity, then pull registry details, officers, shareholders,
+  group structure and financials into one dossier.
+
 ## Links
 
 - [Homepage](https://mcp.globaldatabase.com)

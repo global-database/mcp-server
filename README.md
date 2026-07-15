@@ -35,6 +35,20 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (per project):
 claude mcp add --transport http global-database https://mcp.globaldatabase.com/mcp
 ```
 
+### Perplexity
+
+Requires a paid plan (custom connectors are a Pro/Enterprise feature). In **Settings →
+Connectors → + Custom connector → Remote**, enter:
+
+| Field | Value |
+|---|---|
+| Name | Global Database |
+| MCP Server URL | `https://mcp.globaldatabase.com/mcp` |
+| Authentication | OAuth |
+| Transport | Streamable HTTP |
+
+Then open the connector card to run the OAuth sign-in.
+
 ### Claude.ai / other MCP clients
 
 Add a custom connector pointing at `https://mcp.globaldatabase.com/mcp`.

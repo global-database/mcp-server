@@ -1,7 +1,9 @@
 # Global Database — MCP Server
 
 [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=global-database&config=eyJ0eXBlIjogImh0dHAiLCAidXJsIjogImh0dHBzOi8vbWNwLmdsb2JhbGRhdGFiYXNlLmNvbS9tY3AifQ==)
-[![smithery badge](https://smithery.ai/badge/global-database)](https://smithery.ai/servers/global-database)
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_server-0098FF?logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=global-database&config=%7B%22type%22%3A%20%22http%22%2C%22url%22%3A%20%22https%3A%2F%2Fmcp.globaldatabase.com%2Fmcp%22%7D)
+[![Smithery](https://img.shields.io/badge/Smithery-global--database-7c3aed)](https://smithery.ai/servers/global-database)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-com.globaldatabase%2Fmcp-1f6feb)](https://registry.modelcontextprotocol.io)
 
 Remote [MCP](https://modelcontextprotocol.io/) server that gives LLM agents access to
 [Global Database](https://globaldatabase.com/): company profiles, financials, ownership,
@@ -33,6 +35,21 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (per project):
 
 ```bash
 claude mcp add --transport http global-database https://mcp.globaldatabase.com/mcp
+```
+
+Or install the plugin, which adds the server **and** the `company-due-diligence` skill:
+
+```
+/plugin marketplace add global-database/mcp-server
+/plugin install global-database@global-database
+```
+
+### VS Code (GitHub Copilot)
+
+Use the **Install server** badge above, or add it from the terminal:
+
+```bash
+code --add-mcp '{"name":"global-database","type":"http","url":"https://mcp.globaldatabase.com/mcp"}'
 ```
 
 ### Gemini CLI
@@ -149,15 +166,29 @@ Larger, hierarchical nomenclatures (NACE, ISIC, SIC, industry focus, region) sta
 Prompts shipped with the server: `company_research`, `due_diligence`, `lead_generation`,
 `competitor_analysis`, `market_research`.
 
-## Cursor plugin
+## Plugins and skill
 
-This repo is also packaged as a Cursor plugin (`.cursor-plugin/plugin.json` + `mcp.json`),
-so it can be installed from the Cursor marketplace, not only wired up by hand. It bundles:
+The same contents ship as a plugin for both Cursor (`.cursor-plugin/plugin.json`) and
+Claude Code (`.claude-plugin/marketplace.json`), so the server can be installed from a
+marketplace instead of being wired up by hand. Each plugin bundles:
 
 - the remote MCP server above (all tools), and
 - a **`company-due-diligence`** skill that walks the agent through a structured KYB
   review — resolve the entity, then pull registry details, officers, shareholders,
   group structure and financials into one dossier.
+
+## Where it is listed
+
+| Registry | Entry |
+|---|---|
+| [Official MCP Registry](https://registry.modelcontextprotocol.io) | `com.globaldatabase/mcp` — published from [`server.json`](server.json) |
+| [Smithery](https://smithery.ai/servers/global-database) | `global-database` (verified) |
+| Claude Code plugins | `/plugin marketplace add global-database/mcp-server` |
+| Cursor marketplace | `global-database` |
+| Gemini CLI extensions | `gemini extensions install https://github.com/global-database/mcp-server` |
+
+Maintainer notes — publishing, DNS verification and the remaining directories:
+[`PUBLISHING.md`](PUBLISHING.md).
 
 ## Links
 
@@ -168,7 +199,8 @@ so it can be installed from the Cursor marketplace, not only wired up by hand. I
 
 ## About this repository
 
-Distribution metadata only (`.mcp.json`, `plugin.json`, `gemini-extension.json`) so MCP
-directories can discover the hosted server, plus the client-side extras that ship with it —
-the `company-due-diligence` skill and the Copilot Studio instruction block. The server
-implementation is not open source.
+Distribution metadata only (`server.json`, `.mcp.json`, `plugin.json`,
+`.claude-plugin/`, `.cursor-plugin/`, `gemini-extension.json`) so MCP directories and
+clients can discover the hosted server, plus the client-side extras that ship with it — the
+`company-due-diligence` skill and the Copilot Studio instruction block. MIT covers this
+metadata; the server implementation and the Global Database API are not open source.

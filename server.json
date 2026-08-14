@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.globaldatabase/mcp",
+  "title": "Global Database",
+  "description": "Company, financial, ownership, people and KYB intelligence from Global Database.",
+  "version": "0.2.0",
+  "websiteUrl": "https://mcp.globaldatabase.com",
+  "repository": {
+    "url": "https://github.com/global-database/mcp-server",
+    "source": "github",
+    "id": "1300619680"
+  },
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/global-database/mcp-server/main/logo.png",
+      "mimeType": "image/png",
+      "sizes": ["856x856"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.globaldatabase.com/mcp"
+    }
+  ]
+}

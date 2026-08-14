@@ -1,7 +1,7 @@
 {
   "name": "global-database",
-  "version": "0.1.0",
-  "description": "Company intelligence and KYB/compliance data from Global Database: firmographics, financials, ownership and group structure, digital insights, contact enrichment, and official government-registry lookups.",
+  "version": "0.2.0",
+  "description": "Company intelligence and KYB/compliance data from Global Database: firmographics, financials, ownership and group structure, digital insights, people search and contact enrichment, and official government-registry lookups.",
   "mcpServers": {
     "global-database": {
       "httpUrl": "https://mcp.globaldatabase.com/mcp",

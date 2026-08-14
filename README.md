@@ -5,8 +5,8 @@
 
 Remote [MCP](https://modelcontextprotocol.io/) server that gives LLM agents access to
 [Global Database](https://globaldatabase.com/): company profiles, financials, ownership,
-digital insights, contact enrichment, prospecting, and KYB/compliance lookups against
-official government registries.
+digital insights, people search and contact enrichment, prospecting, and KYB/compliance
+lookups against official government registries.
 
 Hosted at **`https://mcp.globaldatabase.com/mcp`** (Streamable HTTP). Nothing to install
 or run — you connect to it and sign in with your Global Database API key through the
@@ -76,6 +76,18 @@ At [grok.com/connectors](https://grok.com/connectors) → **New Connector → Cu
 MCP server URL `https://mcp.globaldatabase.com/mcp` and complete the OAuth sign-in. Grok
 discovers the tools from the live endpoint.
 
+### Microsoft Copilot Studio
+
+In your agent → **Tools → Add a tool → Model Context Protocol → New MCP server**, enter the
+server URL `https://mcp.globaldatabase.com/mcp` and pick **OAuth 2.0** with dynamic
+registration / discovery. Leave **Scope empty** — the server publishes no scopes, and a
+non-empty one fails the token request.
+
+Copilot Studio ignores the MCP `instructions` field, so the agent starts without the routing
+rules every other client receives. Paste
+[`copilot-studio-instructions.md`](copilot-studio-instructions.md) into **Agent → Overview →
+Instructions** after the connection is created.
+
 ### Claude.ai / other MCP clients
 
 Add a custom connector pointing at `https://mcp.globaldatabase.com/mcp`.
@@ -101,7 +113,10 @@ Get an API key at [globaldatabase.com](https://globaldatabase.com/).
 | `get_company_financials` | Balance sheet, ratios, and key metrics per year. |
 | `get_company_ownership` | Shareholders and corporate group structure. |
 | `get_digital_insights` | Web traffic, rankings, traffic sources, WHOIS, technologies. |
-| `enrich_employee_contacts` | Find and enrich an employee/contact. |
+| `search_employees` | Find the people at a company, or people by name, role, department, or seniority. |
+| `get_employee_details` | Full profile for one person from a `search_employees` row. |
+| `find_people_by_domain` | Find people at companies given by web domain, via the contact-enrichment providers. |
+| `enrich_employee_contacts` | Find and enrich one named employee/contact — email, phone, socials. |
 | `get_nomenclature` | Lookup values for use with prospecting filters. |
 | `prospecting` | Search and filter companies by country, industry, size, revenue, and more. |
 | `kyb_search` | Search official government registries for KYB/compliance checks. |
@@ -112,6 +127,27 @@ Get an API key at [globaldatabase.com](https://globaldatabase.com/).
 | `kyb_group_structure` | Corporate group structure from the official registry. |
 | `kyb_financial` | Detailed financial statements across multiple years. |
 | `kyb_officers_search` | Reverse officer lookup by person's name, across jurisdictions. |
+
+## Resources and prompts
+
+Beyond tools, the server exposes MCP resources so a client can load reference data once per
+conversation instead of spending a tool call (and credits) on it:
+
+| Resource | Contents |
+|---|---|
+| `gdb://nomenclature/country` | Country list for the `prospecting` location filter. |
+| `gdb://nomenclature/kyb-countries` | Country list for `kyb_search`. |
+| `gdb://nomenclature/company-status` | Company status values for `prospecting`. |
+| `gdb://nomenclature/department` | Department ids for `search_employees`. |
+| `gdb://nomenclature/seniority` | Seniority ids for `search_employees`. |
+| `gdb://docs/prospecting-filters` | Full prospecting filter catalog — field names and value formats. |
+| `gdb://docs/intent-glossary` | Keyword → tool glossary for routing a request. |
+
+Larger, hierarchical nomenclatures (NACE, ISIC, SIC, industry focus, region) stay behind the
+`get_nomenclature` tool and its `search` parameter.
+
+Prompts shipped with the server: `company_research`, `due_diligence`, `lead_generation`,
+`competitor_analysis`, `market_research`.
 
 ## Cursor plugin
 
@@ -132,5 +168,7 @@ so it can be installed from the Cursor marketplace, not only wired up by hand. I
 
 ## About this repository
 
-Distribution metadata only (`.mcp.json`, `plugin.json`) so MCP directories can discover the
-hosted server. The server implementation is not open source.
+Distribution metadata only (`.mcp.json`, `plugin.json`, `gemini-extension.json`) so MCP
+directories can discover the hosted server, plus the client-side extras that ship with it —
+the `company-due-diligence` skill and the Copilot Studio instruction block. The server
+implementation is not open source.

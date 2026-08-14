@@ -1,8 +1,8 @@
 {
   "name": "global-database",
   "displayName": "Global Database",
-  "description": "Company profiles, financials, ownership, digital insights, contact enrichment, prospecting and KYB/compliance lookups against official government registries.",
-  "version": "0.1.0",
+  "description": "Company profiles, financials, ownership, digital insights, people search and contact enrichment, prospecting and KYB/compliance lookups against official government registries.",
+  "version": "0.2.0",
   "homepage": "https://mcp.globaldatabase.com",
   "logo": "logo.png",
   "categories": [

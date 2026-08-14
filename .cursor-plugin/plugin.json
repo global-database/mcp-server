@@ -1,8 +1,8 @@
 {
   "name": "global-database",
   "displayName": "Global Database",
-  "version": "0.1.0",
-  "description": "Global Database gives agents company intelligence and KYB/compliance data: firmographics, financials, ownership and corporate group structure, digital insights, and contact enrichment, plus official government-registry lookups for directors, shareholders and filings across jurisdictions. Users sign in through a browser OAuth flow with their Global Database API key — no credentials are configured in the client.",
+  "version": "0.2.0",
+  "description": "Global Database gives agents company intelligence and KYB/compliance data: firmographics, financials, ownership and corporate group structure, digital insights, people search and contact enrichment, plus official government-registry lookups for directors, shareholders and filings across jurisdictions. Users sign in through a browser OAuth flow with their Global Database API key — no credentials are configured in the client.",
   "author": {
     "name": "Global Database",
     "email": "support@globaldatabase.com"

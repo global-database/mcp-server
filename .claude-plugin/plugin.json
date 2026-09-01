@@ -2,7 +2,7 @@
   "name": "global-database",
   "displayName": "Global Database",
   "description": "Company profiles, financials, ownership, digital insights, people search and contact enrichment, prospecting and KYB/compliance lookups against official government registries. Users sign in through a browser OAuth flow with their Global Database API key — no credentials are configured in the client.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Global Database",
     "email": "support@globaldatabase.com",

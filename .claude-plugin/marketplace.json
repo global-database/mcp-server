@@ -6,14 +6,14 @@
     "url": "https://globaldatabase.com/"
   },
   "description": "Company intelligence, people search and KYB/compliance data from Global Database.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "plugins": [
     {
       "name": "global-database",
       "displayName": "Global Database",
       "source": "./",
       "description": "Company profiles, financials, ownership, digital insights, people search and contact enrichment, prospecting and KYB/compliance lookups against official government registries.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": {
         "name": "Global Database",
         "email": "support@globaldatabase.com",

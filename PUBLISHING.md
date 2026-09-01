@@ -80,21 +80,40 @@ several directory filters depend on it.
 | Smithery | `smithery.yaml` (server repo) | Listed as `global-database`. |
 | Microsoft Copilot Studio | `copilot-studio-instructions.md` | Connector setup lives in the server repo. |
 
-## 4. Directories that need a manual submission
+## 4. Directories — state as of 2026-09-01
 
-| Directory | How |
+Each row below was checked against the live site on that date, not inferred.
+
+**Done, nothing to submit:**
+
+| Directory | Note |
 |---|---|
-| [Glama](https://glama.ai/mcp/servers) | "Add server" form; it then tracks the GitHub repo. |
-| [PulseMCP](https://www.pulsemcp.com/) | Submission form; also ingests the official registry. |
-| [mcp.so](https://mcp.so/) | Submission form. |
-| [Smithery](https://smithery.ai/) | Already listed and verified. |
-| [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | Pull request. |
-| Docker MCP Catalog | PR to `docker/mcp-registry` — remote servers are accepted. |
+| [Smithery](https://smithery.ai/servers/global-database) | Listed. |
+| [Glama](https://glama.ai/mcp/connectors/com.globaldatabase/mcp) | Listed, and it does ingest the official registry — the entry carries our `server.json` description verbatim. **Listed twice**: a second entry sits at `com.globaldatabase.mcp/global-database` from an older manual submission. Claim the registry-derived one (GitHub, HTTP challenge, or DNS — we already hold the DNS key) and ask support@glama.ai to drop the other. Claiming the duplicate instead is the wrong way round: the registry-derived entry regenerates no matter how often it is deleted. |
+| [Claude Connectors Directory](https://claude.ai/directory/global-database) | Listed at **Community** tier. Two follow-ups: request verification, and refresh the tool list — it advertises five tools against the twenty-three the server registers, and two of the five (`get_company_by_url`, `autocomplete`) are Python function names from before the `@mcp.tool(name=...)` rename, so the snapshot predates it. |
+| [OpenAI ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_696f807d21a481918a1ed1f43d719ce9) | Listed since 2026-06-23. |
+| [Cursor Directory](https://cursor.directory/plugins/mcp-global-database-3) | Listed. **Also twice** — `plugins/global-database-1` is the duplicate. |
+| [mcptop.com](https://mcptop.com/server/openai-global-database) | Third-party leaderboard; ingests automatically, no submission exists. |
+
+**Open:**
+
+| Directory | State |
+|---|---|
+| [PulseMCP](https://www.pulsemcp.com/submit) | **Cannot submit.** The form is closed: "we are not accepting new MCP server or client submissions, and we are not making changes to existing listings", and it points at the Official MCP Registry as the thing to do instead — which is done. They say they will pick it up when their pipeline reopens. The banner still reads "until mid-August" well past that date, so treat the restart as unscheduled. |
+| [mcp.so](https://mcp.so/submit?type=remote-server) | **Paid — $39** for a remote-server listing. A spend decision, not a packaging task. |
+| VS Code / GitHub MCP gallery | **Not an ingest of the official registry**, contrary to what this file used to imply. `code.visualstudio.com/mcp` redirects to <https://github.com/mcp>, served by `api.mcp.github.com` — a different service from `registry.modelcontextprotocol.io`. Paginating its whole catalogue returned 250 servers across three pages, none of them ours. It is curated; the route in is not documented publicly and has not been found. |
+| [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) | **No longer accepts third-party entries.** Its README now says the repo holds only the steering group's reference servers and directs readers to the MCP Registry — where we already are. Treat this one as satisfied elsewhere, not outstanding. |
+| [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | Pull request. Not attempted. |
+| Docker MCP Catalog | PR to `docker/mcp-registry`; remote servers are accepted. Not attempted. |
 
 ## 5. Release checklist
 
 1. Bump `version` in `server.json`, `plugin.json`, `.cursor-plugin/plugin.json`,
    `.claude-plugin/*.json`, `gemini-extension.json` — keep them identical.
 2. Update the tool table in `README.md` if tools changed.
-3. Tag: `git tag v0.2.0 && git push origin v0.2.0` → the workflow publishes to the registry.
+3. Tag: `git tag v0.2.1 && git push origin v0.2.1` → the workflow publishes to the registry.
+   The registry is append-only on versions: a published version cannot be replaced with
+   different content, only superseded, so a mistake is fixed by bumping again.
+   `description` is capped at **100 characters** by the registry schema — the long product
+   copy belongs in the per-client manifests, not here.
 4. Confirm the registry entry with the `curl` above.

@@ -179,13 +179,29 @@ marketplace instead of being wired up by hand. Each plugin bundles:
 
 ## Where it is listed
 
-| Registry | Entry |
+Verified 2026-09-01.
+
+| Directory | Entry |
 |---|---|
-| [Official MCP Registry](https://registry.modelcontextprotocol.io) | `com.globaldatabase/mcp` — published from [`server.json`](server.json) |
-| [Smithery](https://smithery.ai/servers/global-database) | `global-database` (verified) |
+| [Official MCP Registry](https://registry.modelcontextprotocol.io) | [`com.globaldatabase/mcp`](https://registry.modelcontextprotocol.io/v0/servers?search=globaldatabase) — published from [`server.json`](server.json) |
+| [Claude Connectors Directory](https://claude.ai/directory) | [`global-database`](https://claude.ai/directory/global-database) — Community tier |
+| [OpenAI ChatGPT](https://chatgpt.com/) | [Global Database](https://chatgpt.com/plugins/plugin_asdk_app_696f807d21a481918a1ed1f43d719ce9) — Apps SDK app |
+| [Smithery](https://smithery.ai/servers/global-database) | [`global-database`](https://smithery.ai/servers/global-database) |
+| [Glama](https://glama.ai/mcp/servers) | [`com.globaldatabase/mcp`](https://glama.ai/mcp/connectors/com.globaldatabase/mcp) |
+| [Cursor Directory](https://cursor.directory/) | [`mcp-global-database-3`](https://cursor.directory/plugins/mcp-global-database-3) |
+| [mcptop.com](https://mcptop.com/) | [`openai-global-database`](https://mcptop.com/server/openai-global-database) — third-party leaderboard |
+
+Also installable without a directory:
+
+| Channel | How |
+|---|---|
 | Claude Code plugins | `/plugin marketplace add global-database/mcp-server` |
-| Cursor marketplace | `global-database` |
-| Gemini CLI extensions | `gemini extensions install https://github.com/global-database/mcp-server` |
+| Antigravity CLI | `agy plugin install` against this repo |
+| Gemini Enterprise | admin registers it as a custom MCP connection per tenant |
+
+Not listed: PulseMCP (their submissions are paused), mcp.so, and the VS Code / GitHub MCP
+gallery — that last one is a curated catalogue of a few hundred servers and is **not** an
+ingest of the Official MCP Registry, so publishing there does not reach it.
 
 Maintainer notes — publishing, DNS verification and the remaining directories:
 [`PUBLISHING.md`](PUBLISHING.md).

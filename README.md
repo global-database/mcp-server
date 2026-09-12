@@ -37,7 +37,8 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (per project):
 claude mcp add --transport http global-database https://mcp.globaldatabase.com/mcp
 ```
 
-Or install the plugin, which adds the server **and** the `company-due-diligence` skill:
+Or install the plugin, which adds the server **and** three skills (`company-due-diligence`,
+`company-snapshot`, `prospect-list`):
 
 ```
 /plugin marketplace add global-database/mcp-server
@@ -51,6 +52,32 @@ Use the **Install server** badge above, or add it from the terminal:
 ```bash
 code --add-mcp '{"name":"global-database","type":"http","url":"https://mcp.globaldatabase.com/mcp"}'
 ```
+
+To commit it for a whole repository instead, put this in `.vscode/mcp.json` — the copy in
+this repo is exactly that file, so cloning it and opening the folder in VS Code offers the
+server without any further setup:
+
+```json
+{
+  "servers": {
+    "global-database": {
+      "type": "http",
+      "url": "https://mcp.globaldatabase.com/mcp"
+    }
+  }
+}
+```
+
+Note the key is **`servers`**, not `mcpServers`. VS Code differs from Claude Code and Cursor
+here, the same way Gemini CLI expects `httpUrl` and Antigravity expects `serverUrl` for the
+identical endpoint. Copying the wrong file between clients produces a config that loads
+without error and connects to nothing.
+
+A user-level equivalent exists too — run **MCP: Open User Configuration** from the Command
+Palette (it lives under the VS Code user profile, not `~/.copilot/mcp-config.json` — that
+path belongs to the separate GitHub Copilot CLI and expects `mcpServers`, not `servers`).
+
+Signing in is a browser OAuth flow on first use; there is nothing to paste into the config.
 
 ### Gemini CLI
 
@@ -173,9 +200,11 @@ Claude Code (`.claude-plugin/marketplace.json`), so the server can be installed 
 marketplace instead of being wired up by hand. Each plugin bundles:
 
 - the remote MCP server above (all tools), and
-- a **`company-due-diligence`** skill that walks the agent through a structured KYB
+- three skills: **`company-due-diligence`** walks the agent through a structured KYB
   review — resolve the entity, then pull registry details, officers, shareholders,
-  group structure and financials into one dossier.
+  group structure and financials into one dossier; **`company-snapshot`** gives a fast
+  one-screen profile instead of the full dossier; **`prospect-list`** builds a target
+  account list from firmographic filters, optionally enriched with contacts.
 
 ## Where it is listed
 
@@ -185,6 +214,7 @@ Verified 2026-09-01.
 |---|---|
 | [Official MCP Registry](https://registry.modelcontextprotocol.io) | [`com.globaldatabase/mcp`](https://registry.modelcontextprotocol.io/v0/servers?search=globaldatabase) — published from [`server.json`](server.json) |
 | [Claude Connectors Directory](https://claude.ai/directory) | [`global-database`](https://claude.ai/directory/global-database) — Community tier |
+| [Claude Plugin Directory](https://claude.com/plugins) | `global-database` — **submitted 2026-09-01, pending review**. Ships the MCP server plus three skills |
 | [OpenAI ChatGPT](https://chatgpt.com/) | [Global Database](https://chatgpt.com/plugins/plugin_asdk_app_696f807d21a481918a1ed1f43d719ce9) — Apps SDK app |
 | [Smithery](https://smithery.ai/servers/global-database) | [`global-database`](https://smithery.ai/servers/global-database) |
 | [Glama](https://glama.ai/mcp/servers) | [`com.globaldatabase/mcp`](https://glama.ai/mcp/connectors/com.globaldatabase/mcp) |
@@ -201,7 +231,10 @@ Also installable without a directory:
 
 Not listed: PulseMCP (their submissions are paused), mcp.so, and the VS Code / GitHub MCP
 gallery — that last one is a curated catalogue of a few hundred servers and is **not** an
-ingest of the Official MCP Registry, so publishing there does not reach it.
+ingest of the Official MCP Registry, so publishing there does not reach it. Also not
+pursued: Perplexity's curated connector catalog (no self-serve submission exists — only the
+custom-connector route above) and Microsoft's MCP server certification for Copilot Studio (a
+real Partner Center pipeline, unlike Perplexity's — see `PUBLISHING.md`).
 
 Maintainer notes — publishing, DNS verification and the remaining directories:
 [`PUBLISHING.md`](PUBLISHING.md).
@@ -218,5 +251,5 @@ Maintainer notes — publishing, DNS verification and the remaining directories:
 Distribution metadata only (`server.json`, `.mcp.json`, `plugin.json`,
 `.claude-plugin/`, `.cursor-plugin/`, `gemini-extension.json`) so MCP directories and
 clients can discover the hosted server, plus the client-side extras that ship with it — the
-`company-due-diligence` skill and the Copilot Studio instruction block. MIT covers this
+three skills and the Copilot Studio instruction block. MIT covers this
 metadata; the server implementation and the Global Database API are not open source.

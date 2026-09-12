@@ -94,6 +94,7 @@ Each row below was checked against the live site on that date, not inferred.
 | [OpenAI ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_696f807d21a481918a1ed1f43d719ce9) | Listed since 2026-06-23. |
 | [Cursor Directory](https://cursor.directory/plugins/mcp-global-database-3) | Listed. **Also twice** — `plugins/global-database-1` is the duplicate. |
 | [mcptop.com](https://mcptop.com/server/openai-global-database) | Third-party leaderboard; ingests automatically, no submission exists. |
+| [Claude Plugin Directory](https://claude.com/plugins) | **Submitted 2026-09-01, pending review.** A different directory from the Connectors one above — it lists a *plugin* (this repo: the MCP server plus `skills/`), installable in Claude Code and Cowork. Filed through <https://platform.claude.com/plugins/submit>; the Console form requires an **Admin** role on the organisation, a Developer cannot file it. The review pipeline pins a commit SHA, so push before submitting. |
 
 **Open:**
 
@@ -105,15 +106,55 @@ Each row below was checked against the live site on that date, not inferred.
 | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) | **No longer accepts third-party entries.** Its README now says the repo holds only the steering group's reference servers and directs readers to the MCP Registry — where we already are. Treat this one as satisfied elsewhere, not outstanding. |
 | [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | Pull request. Not attempted. |
 | Docker MCP Catalog | PR to `docker/mcp-registry`; remote servers are accepted. Not attempted. |
+| Perplexity — curated connector catalog | **No self-serve submission exists.** Confirmed 2026-09-11 against the Help Center and two open threads on `community.perplexity.ai` asking the same question with no official answer beyond "use the custom connector." The custom-connector route (per-user, self-serve, already live) is documented in `README.md`. Curated-catalog entries seen in the wild (Semrush, PitchBook "Essential Partner", Canary Data) are negotiated business partnerships, not technical submissions — contact is `partnerships@perplexity.ai`. Not attempted. |
+| Microsoft Copilot Studio — MCP server certification | Submitted 2026-09-11, in progress. Internal notes (Partner Center IDs, Key Vault, credentials) kept locally, not in this repo. |
+
+## 4b. Visual Studio Marketplace — the VS Code route that is actually open
+
+Separate from the gallery row above, and worth keeping straight. `github.com/mcp` is a
+curated catalogue with no submission route. **Visual Studio Marketplace is self-serve**, and
+the way an MCP server reaches it is wrapped in an extension: `vscode-extension/` in this
+repo is that wrapper.
+
+It contributes `mcpServerDefinitionProviders` in `package.json` and implements
+`vscode.lm.registerMcpServerDefinitionProvider`, handing VS Code the remote URL. Nothing is
+spawned locally and no API key is stored — VS Code drives the OAuth flow against the
+server's own metadata. Precedents on the Marketplace: Microsoft's Azure MCP Server and the
+PostgreSQL extension.
+
+**One correction worth keeping.** The published guide at
+<https://code.visualstudio.com/api/extension-guides/ai/mcp> shows
+`new vscode.McpHttpServerDefinition({ label, uri, version })` — an options object. The
+shipped API does not accept one; it is positional,
+`constructor(label: string, uri: Uri, headers?, version?)`, and the documented form fails to
+compile with `TS2554: Expected 2-4 arguments, but got 1`. Build against `@types/vscode`
+rather than the guide.
+
+Publishing, once a publisher account exists on Azure DevOps:
+
+```bash
+cd vscode-extension
+npm install
+npx @vscode/vsce package --no-dependencies   # produces the .vsix, verified
+npx @vscode/vsce publish                     # needs a Personal Access Token
+```
+
+Keep `vscode-extension/package.json` `version` in step with the other manifests — it is an
+eighth place the version is declared, and `scripts/check_manifests.py` already checks it
+(`check_versions` and `check_vscode_extension`).
 
 ## 5. Release checklist
 
 1. Bump `version` in `server.json`, `plugin.json`, `.cursor-plugin/plugin.json`,
    `.claude-plugin/*.json`, `gemini-extension.json` — keep them identical.
 2. Update the tool table in `README.md` if tools changed.
-3. Tag: `git tag v0.2.1 && git push origin v0.2.1` → the workflow publishes to the registry.
+3. Validate **both** manifests. `claude plugin validate <path> --strict` picks one target,
+   and `.claude-plugin/marketplace.json` wins when it exists — so that command alone never
+   checks `plugin.json`. To cover it, copy the repo to a temp directory, delete
+   `marketplace.json` from the copy, and validate that. Both must pass.
+4. Tag: `git tag v0.2.1 && git push origin v0.2.1` → the workflow publishes to the registry.
    The registry is append-only on versions: a published version cannot be replaced with
    different content, only superseded, so a mistake is fixed by bumping again.
    `description` is capped at **100 characters** by the registry schema — the long product
    copy belongs in the per-client manifests, not here.
-4. Confirm the registry entry with the `curl` above.
+5. Confirm the registry entry with the `curl` above.

@@ -21,6 +21,10 @@ SCHEMA_URL = "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.s
 
 # Every place a version is declared, as (file, key path). Absent from this list means
 # the file carries no version — say so on purpose, do not let it drift by omission.
+#
+# openai-plugin/plugin.json is left out on purpose: the ChatGPT package has its own
+# version line (1.0.0 was live there before this repo's 0.2.x existed), bumped per upload
+# by scripts/build_openai_plugin.sh's caller.
 VERSIONED = [
     ("server.json", ("version",)),
     ("plugin.json", ("version",)),

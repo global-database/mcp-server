@@ -1,0 +1,43 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "app-696f807d21a481918a1ed1f43d719ce9",
+  "version": "1.1.0",
+  "description": "Company profiles, financials, ownership, people and prospecting from official government registries, with workflows for due diligence, company snapshots and prospect lists.",
+  "author": {
+    "name": "Global Database",
+    "url": "https://globaldatabase.com"
+  },
+  "homepage": "https://mcp.globaldatabase.com",
+  "repository": "https://github.com/global-database/mcp-server",
+  "license": "MIT",
+  "keywords": [
+    "company-data",
+    "kyb",
+    "due-diligence",
+    "prospecting",
+    "financials",
+    "ownership"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Global Database",
+        "shortDescription": "Official company registry data",
+        "longDescription": "Global Database answers company due diligence, KYB/compliance and B2B prospecting questions, using company data sourced from official government registries and business contact data.\n\nLook up any company across 195+ countries using data sourced directly from official government registries.\n\nWhat you can do:\n- Find company registration details, status, and filings\n- Pull financial statements and key figures\n- Identify directors, shareholders, and beneficial owners\n- Map corporate group structures and ownership chains\n- Verify businesses for KYB and compliance checks\n\nGlobal Database connects to 400+ government registries worldwide, covering 600M+ companies. Every data point traces back to an official source.",
+        "developerName": "Global Database",
+        "category": "Business & Operations",
+        "websiteURL": "https://globaldatabase.com",
+        "supportURL": "https://globaldatabase.com/contact-us",
+        "privacyPolicyURL": "https://www.globaldatabase.com/privacy-notice",
+        "termsOfServiceURL": "https://www.globaldatabase.com/terms-and-conditions",
+        "defaultPrompt": [
+          "Run a due diligence check on Tesco PLC",
+          "Give me a quick snapshot of the company behind ocado.com",
+          "Build a list of software companies in Germany with 50-200 employees"
+        ],
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png"
+      }
+    }
+  }
+}

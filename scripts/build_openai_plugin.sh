@@ -31,7 +31,7 @@ STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
 cp "$REPO/openai-plugin/plugin.json" "$STAGE/"
-cp -R "$REPO/skills" "$STAGE/skills"
+cp -R "$REPO/plugins/global-database/skills" "$STAGE/skills"
 mkdir -p "$STAGE/assets"
 cp "$REPO/logo.png" "$STAGE/assets/logo.png"
 find "$STAGE" -name .DS_Store -delete

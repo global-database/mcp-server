@@ -30,7 +30,7 @@ VERSIONED = [
     ("plugin.json", ("version",)),
     ("gemini-extension.json", ("version",)),
     (".cursor-plugin/plugin.json", ("version",)),
-    (".claude-plugin/plugin.json", ("version",)),
+    ("plugins/global-database/.claude-plugin/plugin.json", ("version",)),
     (".claude-plugin/marketplace.json", ("version",)),
     (".claude-plugin/marketplace.json", ("plugins", 0, "version")),
     ("vscode-extension/package.json", ("version",)),
@@ -42,6 +42,7 @@ VERSIONED = [
 SERVER_KEY_BY_FILE = {
     ".mcp.json": ("mcpServers", "url"),
     "mcp.json": ("mcpServers", "url"),
+    "plugins/global-database/mcp.json": ("mcpServers", "url"),
     ".vscode/mcp.json": ("servers", "url"),
     "gemini-extension.json": ("mcpServers", "httpUrl"),
 }

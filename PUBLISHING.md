@@ -73,7 +73,7 @@ several directory filters depend on it.
 
 | Channel | File | Notes |
 |---|---|---|
-| Claude Code plugin marketplace | `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json` | `/plugin marketplace add global-database/mcp-server` |
+| Claude Code plugin marketplace | `.claude-plugin/marketplace.json`, `plugins/global-database/` (the plugin itself) | `/plugin marketplace add global-database/mcp-server` |
 | Cursor plugin marketplace | `.cursor-plugin/plugin.json`, `mcp.json` | Submitted through Cursor's marketplace form. |
 | Gemini CLI extension | `gemini-extension.json` | `gemini extensions install <repo url>` |
 | Generic MCP config | `.mcp.json`, `mcp.json` | Read by Claude Code, Cursor and most clients. |
@@ -94,7 +94,7 @@ Each row below was checked against the live site on that date, not inferred.
 | [OpenAI ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_696f807d21a481918a1ed1f43d719ce9) | Listed since 2026-06-23. |
 | [Cursor Directory](https://cursor.directory/plugins/mcp-global-database-3) | Listed. **Also twice** — `plugins/global-database-1` is the duplicate. |
 | [mcptop.com](https://mcptop.com/server/openai-global-database) | Third-party leaderboard; ingests automatically, no submission exists. |
-| [Claude Plugin Directory](https://claude.com/plugins) | **Submitted 2026-09-01, pending review.** A different directory from the Connectors one above — it lists a *plugin* (this repo: the MCP server plus `skills/`), installable in Claude Code and Cowork. Filed through <https://platform.claude.com/plugins/submit>; the Console form requires an **Admin** role on the organisation, a Developer cannot file it. The review pipeline pins a commit SHA, so push before submitting. |
+| [Claude Plugin Directory](https://claude.com/plugins) | **Submitted 2026-09-01, pending review.** A different directory from the Connectors one above — it lists a *plugin* (`plugins/global-database/`: the MCP server plus `skills/`), installable in Claude Code and Cowork. Filed through <https://platform.claude.com/plugins/submit>; the Console form requires an **Admin** role on the organisation, a Developer cannot file it. The review pipeline pins a commit SHA, so push before submitting. |
 
 **Open:**
 

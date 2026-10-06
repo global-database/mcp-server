@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "global-database": {
+      "type": "http",
+      "url": "https://mcp.globaldatabase.com/mcp"
+    }
+  }
+}

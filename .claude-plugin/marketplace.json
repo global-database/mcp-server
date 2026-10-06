@@ -11,7 +11,7 @@
     {
       "name": "global-database",
       "displayName": "Global Database",
-      "source": "./",
+      "source": "./plugins/global-database",
       "description": "Company profiles, financials, ownership, digital insights, people search and contact enrichment, prospecting and KYB/compliance lookups against official government registries.",
       "version": "0.2.1",
       "author": {
@@ -24,9 +24,7 @@
       "license": "MIT",
       "category": "Data & Analytics",
       "keywords": ["company-data", "kyb", "compliance", "prospecting", "enrichment", "mcp"],
-      "tags": ["business-intelligence", "kyb", "prospecting", "financials", "mcp"],
-      "mcpServers": "./mcp.json",
-      "skills": "./skills"
+      "tags": ["business-intelligence", "kyb", "prospecting", "financials", "mcp"]
     }
   ]
 }

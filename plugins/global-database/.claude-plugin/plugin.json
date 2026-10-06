@@ -12,6 +12,8 @@
   "repository": "https://github.com/global-database/mcp-server",
   "license": "MIT",
   "privacyPolicyUrl": "https://mcp.globaldatabase.com/static/privacy.html",
+  "termsOfServiceUrl": "https://mcp.globaldatabase.com/static/terms.html",
+  "documentationUrl": "https://github.com/global-database/mcp-server/tree/main/plugins/global-database#readme",
   "keywords": ["company-data", "kyb", "compliance", "prospecting", "enrichment", "mcp"],
   "mcpServers": "./mcp.json",
   "skills": "./skills",

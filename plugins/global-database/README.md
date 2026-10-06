@@ -62,5 +62,5 @@ support@globaldatabase.com · https://github.com/global-database/mcp-server
 ## License
 
 MIT for the plugin files in this folder (skills, manifests, documentation). The hosted
-server and the Global Database API are proprietary and governed by
-https://mcp.globaldatabase.com/static/terms.html.
+server and the Global Database API are proprietary; see the
+[Terms of Service](https://mcp.globaldatabase.com/static/terms.html).
